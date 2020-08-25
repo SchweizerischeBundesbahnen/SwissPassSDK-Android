@@ -1,7 +1,7 @@
 ﻿SwissPassClient SDK for Android
 ===============================
 
-Copyright &copy; Schweizerische Bundesbahnen SBB, 2016-2019.$
+Copyright &copy; Schweizerische Bundesbahnen SBB, 2016-2012.$
 
 ## Overview
 
@@ -24,14 +24,6 @@ In the event of a logout, the existing activation on the SwissPass will not be d
 
 Android min API Level 21.
 
-## further information
+## Further information
 
 All error messages and their descriptions are in RequestListener.java
-
-### documentation
-
-The project page is available at Confluence https://confluence-ext.sbb.ch/display/NOVAUG/SwissPass+Client+integration
-
-### Demo App
-
-The demo app can be found on Code-Ext https://code-ext.sbb.ch/projects/SID/repos/swisspassclientsdk/browse/android/swisspassclientsdk-demo
