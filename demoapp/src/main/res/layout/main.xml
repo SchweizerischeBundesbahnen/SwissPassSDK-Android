@@ -1,0 +1,276 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Response code: "
+            android:textAllCaps="true" />
+
+        <TextView
+            android:id="@+id/responseCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/swisspass_light_red"
+            android:focusable="false" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dev message: "
+            android:textAllCaps="true" />
+
+        <TextView
+            android:id="@+id/developerMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/swisspass_light_red"
+            android:focusable="false" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="user message: "
+            android:textAllCaps="true" />
+
+        <TextView
+            android:id="@+id/userMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/swisspass_light_red"
+            android:focusable="false" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Access Token"
+        android:textAllCaps="true" />
+
+    <TextView
+        android:id="@+id/accessTokenTextView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/swisspass_light_red"
+        android:focusable="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UserInfo"
+        android:textAllCaps="true" />
+
+    <TextView
+        android:id="@+id/idUserInfoTextView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/swisspass_light_red"
+        android:focusable="false" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:onClick="onLogin"
+                android:text="Login" />
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:onClick="onRegister"
+                android:text="Register" />
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:onClick="onToken"
+                android:text="Get Token" />
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:onClick="onRefreshToken"
+                android:text="Refresh Token" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="onIsKeyStoreAvailable"
+                    android:text="Is KeyStore Available" />
+
+                <TextView
+                    android:id="@+id/isLoggedInTextView"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/swisspass_light_red"/>
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:onClick="onUserInfo"
+                android:text="UserInfo" />
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:onClick="onTokenManagement"
+                android:text="Token Management" />
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:onClick="onAccountManagement"
+                android:text="Account Management" />
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:onClick="onLoginDataManagement"
+                android:text="Login Data Management" />
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:onClick="onLinkCard"
+                android:text="Link Card" />
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:onClick="onInfoSwissPass"
+                android:text="Info Swisspass" />
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:onClick="onInfoAbo"
+                android:text="Info Abo" />
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:onClick="onContact"
+                android:text="Contact" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/reauthenticateButton"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="onReauthenticate"
+                    android:text="Reauthenticate" />
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/deviceSelector"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="device"
+                        android:textSize="10dp" />
+
+                    <RadioButton
+                        android:id="@+id/fingerprintSelector"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="finger"
+                        android:textSize="10dp" />
+
+                    <RadioButton
+                        android:id="@+id/passwordSelector"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="password"
+                        android:textSize="10dp" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:onClick="onLogout"
+                android:text="Logout" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="onSwissPassMobileStatus"
+                    android:text="SwissPass Mobile Status" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/swisspass_light_red"
+                    android:id="@+id/swisspassStatus"/>
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:onClick="onSwissPassMobileActivate"
+                android:text="SwissPass Mobile Activate" />
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:onClick="onSwissPassMobileShow"
+                android:text="SwissPass Mobile Show" />
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:onClick="onSwissPassMobileDeactivate"
+                android:text="SwissPass Mobile Deactivate" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
+

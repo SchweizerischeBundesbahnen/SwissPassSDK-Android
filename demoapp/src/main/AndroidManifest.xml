@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ch.sbb.spc.demo">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".DemoApplication"
+        android:label="SwissPass Test">
+
+        <!-- Testapp -->
+        <activity
+            android:name="ch.sbb.spc.demo.MainActivity"
+            android:label="Swisspass Client SDK demo">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".SwissPassMobileActivity"
+            android:label="Swisspass Client SDK demo"/>
+
+
+        <!--
+        This Activity definition is needed in Swisspass Client app, copy it as it is here and then
+        changes data scheme/host according to your app redirectAppUrl.
+        -->
+        <activity
+            android:name="ch.sbb.spc.OAuthActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="oauth"
+                    android:scheme="sidapp" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>

@@ -1,0 +1,82 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        release {
+            storeFile file('keystore.jks')
+            storePassword 'demoapp'
+            keyAlias 'key0'
+            keyPassword 'demoapp'
+        }
+    }
+    compileSdkVersion projectAndroidVersion
+    buildToolsVersion projectAndroidBuildToolsVersion
+    defaultConfig {
+        applicationId 'ch.sbb.spc.demo'
+        minSdkVersion projectAndroidMinVersion
+        targetSdkVersion projectAndroidTargetVersion
+        versionCode 203060
+        versionName '2.3.6'
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/ASL2.0.txt'
+        exclude 'META-INF/ASL2.0'
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+        }
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            proguardFiles 'proguard-rules.pro'
+        }
+    }
+
+
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+    buildToolsVersion '28.0.3'
+}
+
+dependencies {
+
+    // Swisspass-client is included in this project locally, thus following
+    // dependencies has to be defined in project. If you load the library
+    // directly from SBB repo, which is recommended, then you don't have to define these dependencies.
+    // url 'https://bin.sbb.ch/artifactory/swisspass.mvn'
+    // e.g: implementation 'ch.sbb.sid.android.lib:swisspass-client:2.3.4'
+
+    // if Swisspass library is included in libs folder, then define all implementations below
+    implementation(name: 'swisspass-client-2.3.6', ext: 'aar') {
+        transitive = true;
+    }
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.browser:browser:1.0.0'
+    implementation 'org.slf4j:slf4j-api:1.7.25'
+    implementation 'com.squareup.okhttp3:okhttp:4.2.2'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'androidx.work:work-runtime:2.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.google.zxing:core:3.3.0'
+
+    // logging is optional, if needed then use these dependencies and
+    // use the logback.xml config file from assets to configure the log level INFO or WARN.
+    implementation 'com.github.tony19:logback-android-core:1.1.1-6'
+    implementation('com.github.tony19:logback-android-classic:1.1.1-6') {
+        exclude group: 'com.google.android'
+    }
+
+
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}

@@ -1,0 +1,37 @@
+buildscript {
+    repositories {
+        maven {
+            url 'https://bin.sbb.ch/artifactory/mvn/'
+            credentials {
+                username System.properties['gradle.wrapperUser']
+                password System.properties['gradle.wrapperPassword']
+            }
+        }
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.4.2'
+    }
+}
+
+ext {
+    projectBuildVersion = PUBLISH_VERSION
+    projectAndroidVersion = 29
+    projectAndroidMinVersion = 21
+    projectAndroidTargetVersion = 29
+    projectAndroidBuildToolsVersion = '29.0.2'
+}
+
+apply plugin: 'java'
+
+subprojects {
+    repositories {
+        maven {
+            url 'https://bin.sbb.ch/artifactory/mvn/'
+            credentials {
+                username System.properties['gradle.wrapperUser']
+                password System.properties['gradle.wrapperPassword']
+            }
+        }
+    }
+}
