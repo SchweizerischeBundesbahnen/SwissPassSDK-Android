@@ -215,13 +215,6 @@
                         android:layout_height="wrap_content"
                         android:text="finger"
                         android:textSize="10dp" />
-
-                    <RadioButton
-                        android:id="@+id/passwordSelector"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="password"
-                        android:textSize="10dp" />
                 </RadioGroup>
 
             </LinearLayout>
@@ -261,6 +254,12 @@
                 android:layout_height="wrap_content"
                 android:onClick="onSwissPassMobileShow"
                 android:text="SwissPass Mobile Show" />
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:onClick="onSwissPassMobileShowCard"
+                android:text="SwissPass Mobile Show Card" />
 
             <Button
                 android:layout_width="200dp"

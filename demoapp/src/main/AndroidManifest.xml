@@ -22,6 +22,9 @@
             android:name=".SwissPassMobileActivity"
             android:label="Swisspass Client SDK demo"/>
 
+        <activity
+            android:name=".SwissPassMobileCardActivity"
+            android:label="Swisspass Client SDK demo"/>
 
         <!--
         This Activity definition is needed in Swisspass Client app, copy it as it is here and then

@@ -39,7 +39,6 @@ public class MainActivity extends Activity {
     TextView isLoggedInTextView;
     TextView swisspassStatus;
     RadioButton fingerprintSelector;
-    RadioButton passwordSelector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +50,6 @@ public class MainActivity extends Activity {
         developerMessageTextView = findViewById(R.id.developerMessage);
         userMessageTextView = findViewById(R.id.userMessage);
         fingerprintSelector = findViewById(R.id.fingerprintSelector);
-        passwordSelector = findViewById(R.id.passwordSelector);
         isLoggedInTextView = findViewById(R.id.isLoggedInTextView);
         swisspassStatus = findViewById(R.id.swisspassStatus);
         fingerprintSelector.setChecked(true);
@@ -264,8 +262,6 @@ public class MainActivity extends Activity {
         ReauthenticationMethod reauthenticationMethod = ReauthenticationMethod.DEVICE_SCREENLOCK;
         if (fingerprintSelector.isChecked()) {
             reauthenticationMethod = ReauthenticationMethod.FINGERPRINT_ONLY;
-        } else if (passwordSelector.isChecked()) {
-            reauthenticationMethod = ReauthenticationMethod.PASSWORD;
         }
 
         SwissPassLoginClient.getInstance().requestAuthentication(reauthenticationMethod, "Fingerprint custom infotext", new RequestListener<Response>() {
@@ -322,6 +318,10 @@ public class MainActivity extends Activity {
         startActivity(new Intent(MainActivity.this, SwissPassMobileActivity.class));
     }
 
+    public void onSwissPassMobileShowCard(View view) {
+        startActivity(new Intent(MainActivity.this, SwissPassMobileCardActivity.class));
+    }
+
     public void onSwissPassMobileDeactivate(View view) {
         SwissPassMobileClient.getInstance().requestSwissPassMobileDeactivation(new RequestListener<Response>() {
             @Override
@@ -359,7 +359,7 @@ public class MainActivity extends Activity {
                 return "SPC_ERROR_ACCESS_DENIED";
             case RequestListener.SPC_ERROR_CANCELLED:
                 return "SPC_ERROR_CANCELLED";
-            case RequestListener.SPC_ERROR_INVALID_TOKEN:
+            case RequestListener.SPC_ERROR_OAUTH_INVALID_TOKEN:
                 return "SPC_ERROR_INVALID_TOKEN";
             case RequestListener.SPC_ERROR_IO:
                 return "SPC_ERROR_IO";

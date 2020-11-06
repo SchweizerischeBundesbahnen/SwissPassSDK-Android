@@ -1,6 +1,17 @@
 ﻿Release Notes SwissPassClient SDK for Android
 =============================================
 
+## Version 3.0.0
+_27.10.2020_
+#### Features
+* Switch to OIDC
+* Refactored all errorCodes. See RequestListener for details.
+* Added SwisspassMobile Cardview.
+* Added a flag to activate/deactivate automatic brightness adjustment for SwissPassMobile
+* Javadoc is updated.
+* ACTIVATION_LIMIT_REACHED AccountStatus removed
+* Added SwisspassInvalid callback notification to SwisspassMobileFragments
+
 ## Version 2.3.6
 _29.01.2020_
 #### Bugfixes

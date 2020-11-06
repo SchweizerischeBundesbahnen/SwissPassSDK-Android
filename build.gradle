@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+
         maven {
             url 'https://bin.sbb.ch/artifactory/mvn/'
             credentials {
