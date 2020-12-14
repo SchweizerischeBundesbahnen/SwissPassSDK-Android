@@ -1,6 +1,12 @@
 ﻿Release Notes SwissPassClient SDK for Android
 =============================================
 
+## Version 3.0.1
+_03.12.2020_
+#### Bugfixes
+* UserInfo Birthdate is now public
+* Fixed a crash when SwissPassMobile fragment is closed while still loading
+
 ## Version 3.0.0
 _27.10.2020_
 #### Features
