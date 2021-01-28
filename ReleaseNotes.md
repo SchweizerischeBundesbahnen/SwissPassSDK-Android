@@ -1,6 +1,13 @@
 ﻿Release Notes SwissPassClient SDK for Android
 =============================================
 
+## Version 3.0.2
+_21.01.2021_
+#### Bugfixes
+* Delete old swisspass data if a new user is logged in
+* Refresh SwissPass Mobile Card Fragment when SwissPass Mobile Card is activated
+* Disable token force refresh on getUserInfo
+
 ## Version 3.0.1
 _03.12.2020_
 #### Bugfixes
