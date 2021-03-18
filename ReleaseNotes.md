@@ -1,6 +1,32 @@
 ﻿Release Notes SwissPassClient SDK for Android
 =============================================
 
+## Version 3.0.7
+_04.03.2021_
+#### Bugfixes
+* fix crash when versionName of browser is null
+
+## Version 3.0.6
+_02.03.2021_
+#### Bugfixes
+* refresh spm cardview when its attached
+
+## Version 3.0.5
+_23.02.2021_
+#### Bugfixes
+* Fix crash on finalizeRequest
+
+## Version 3.0.4
+_05.02.2021_
+#### Bugfixes
+* Change birthday label fontsize to 12 on SPM Cardview
+
+## Version 3.0.3
+_03.02.2021_
+#### Bugfixes
+* Fix multiple animators running simultaneously in the swisspass logo view
+* Fix info message display in the SPM back view
+
 ## Version 3.0.2
 _21.01.2021_
 #### Bugfixes
