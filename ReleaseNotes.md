@@ -1,6 +1,16 @@
 ﻿Release Notes SwissPassClient SDK for Android
 =============================================
 
+## Version 3.0.11
+_26.03.2021_
+#### Bugfixes
+* fix rare bug when decrypting an existing OIDC token
+* fix rare crash when displaying the SPM barcode image
+* updated backup rules
+
+## Version 3.0.8-10
+* Unreleased internal versions
+
 ## Version 3.0.7
 _04.03.2021_
 #### Bugfixes
