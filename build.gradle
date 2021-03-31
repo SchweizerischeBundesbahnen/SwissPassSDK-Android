@@ -27,11 +27,13 @@ apply plugin: 'java'
 
 subprojects {
     repositories {
+        google()
+        jcenter()
         maven {
-            url 'https://bin.sbb.ch/artifactory/mvn/'
-            credentials {
-                username System.properties['gradle.wrapperUser']
-                password System.properties['gradle.wrapperPassword']
+            url "s3://sbb-artefact-repo-prod/releases"
+            credentials(AwsCredentials) {
+                accessKey "${AWS_REPO_ACCESS_KEY}"
+                secretKey "${AWS_REPO_SECRET_KEY}"
             }
         }
     }
