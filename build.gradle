@@ -32,8 +32,8 @@ subprojects {
         maven {
             url "s3://sbb-artefact-repo-prod/releases"
             credentials(AwsCredentials) {
-                accessKey "AKIARYXR2O4LQHQ6SEBR"
-                secretKey "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"
+                accessKey "${AWS_REPO_ACCESS_KEY}"
+                secretKey "${AWS_REPO_SECRET_KEY}"
             }
         }
     }
