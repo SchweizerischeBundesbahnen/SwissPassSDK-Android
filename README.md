@@ -24,6 +24,10 @@ In the event of a logout, the existing activation on the SwissPass will not be d
 
 Android min API Level 21.
 
+## Build Project
+
+AWS_REPO_ACCESS_KEY and AWS_REPO_SECRET_KEY need to be set in the gradle.properties to be able to fetch the Dependencies.
+
 ## Further information
 
 All error messages and their descriptions are in RequestListener.java
