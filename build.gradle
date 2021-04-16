@@ -30,11 +30,7 @@ subprojects {
         google()
         jcenter()
         maven {
-            url "s3://sbb-artefact-repo-prod/releases"
-            credentials(AwsCredentials) {
-                accessKey "${AWS_REPO_ACCESS_KEY}"
-                secretKey "${AWS_REPO_SECRET_KEY}"
-            }
+            url "https://sbb-artefact-repo-prod.s3.eu-central-1.amazonaws.com/releases"
         }
     }
 }
