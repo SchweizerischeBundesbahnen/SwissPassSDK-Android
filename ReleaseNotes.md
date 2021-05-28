@@ -1,6 +1,13 @@
 ﻿Release Notes SwissPassClient SDK for Android
 =============================================
 
+## Version 3.0.12
+_19.05.2021_
+#### Features
+* Switch from Kotlin Android Extensions to ViewBindings
+#### Bugfixes
+* Fix rare SwissPassCardFragment exception in background
+
 ## Version 3.0.11
 _26.03.2021_
 #### Bugfixes

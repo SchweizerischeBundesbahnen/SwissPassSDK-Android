@@ -15,8 +15,8 @@ android {
         applicationId 'ch.sbb.spc.demo'
         minSdkVersion projectAndroidMinVersion
         targetSdkVersion projectAndroidTargetVersion
-        versionCode 203060
-        versionName '2.3.6'
+        versionCode 300120
+        versionName '3.0.12'
     }
     packagingOptions {
         exclude 'META-INF/LICENSE.txt'
@@ -49,7 +49,8 @@ android {
 }
 
 dependencies {
-    implementation 'ch.sbb.sid.android.lib:swisspass-client:3.0.11'
+    implementation 'ch.sbb.sid.android.lib:swisspass-client:3.0.12'
+    implementation 'androidx.databinding:viewbinding:4.2.1'
 
     // logging is optional, if needed then use these dependencies and
     // use the logback.xml config file from assets to configure the log level INFO or WARN.
