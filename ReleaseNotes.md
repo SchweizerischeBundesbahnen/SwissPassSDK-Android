@@ -1,6 +1,14 @@
 ﻿Release Notes SwissPassClient SDK for Android
 =============================================
 
+## Version 3.1.0
+_30.08.2021_
+#### Features
+* Convert SwissPass Fragments to Views (SwissPassMobileFragment, SwissPassCardFragment, SwissPassMobileFrontFragment, SwissPassMobileBackFragment)
+* Call revocation url on logout
+#### Deprecation
+* Mark forceRefresh as deprecated
+
 ## Version 3.0.12
 _19.05.2021_
 #### Features
