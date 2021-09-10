@@ -1,14 +1,7 @@
 buildscript {
     repositories {
-
-        maven {
-            url 'https://bin.sbb.ch/artifactory/mvn/'
-            credentials {
-                username System.properties['gradle.wrapperUser']
-                password System.properties['gradle.wrapperPassword']
-            }
-        }
         google()
+        mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.2'
@@ -28,7 +21,7 @@ apply plugin: 'java'
 subprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
         maven {
             url "https://sbb-artefact-repo-prod.s3.eu-central-1.amazonaws.com/releases"
         }
