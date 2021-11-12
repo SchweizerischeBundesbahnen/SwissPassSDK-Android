@@ -1,6 +1,22 @@
 ﻿Release Notes SwissPassClient SDK for Android
 =============================================
 
+## Version 3.1.3
+_11.11.2021_
+#### Changes
+* Use kotlin 1.5.0
+* Use work-runtime 2.7
+
+## Version 3.1.2
+_06.10.2021_
+#### Bugfixes
+* Fix KotlinNullPointerException when SwissPassCard is shown before SwissPassClient is initialized
+
+## Version 3.1.1
+_28.09.2021_
+#### Bugfixes
+* Fix uncaught exception in SwissPassMobileBackView when the barcode is resized before the UI is ready
+
 ## Version 3.1.0
 _30.08.2021_
 #### Features
