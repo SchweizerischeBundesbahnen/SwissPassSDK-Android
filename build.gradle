@@ -4,16 +4,15 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.1'
+        classpath 'com.android.tools.build:gradle:7.2.1'
     }
 }
 
 ext {
     projectBuildVersion = PUBLISH_VERSION
-    projectAndroidVersion = 31
-    projectAndroidMinVersion = 21
-    projectAndroidTargetVersion = 31
-    projectAndroidBuildToolsVersion = '30.0.2'
+    projectAndroidVersion = 32
+    projectAndroidMinVersion = 23
+    projectAndroidTargetVersion = 32
 }
 
 apply plugin: 'java'

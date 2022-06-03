@@ -1,18 +1,22 @@
 package ch.sbb.spc.demo;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import ch.sbb.spc.AccountStatusResponse;
+import ch.sbb.spc.ClientFactory;
+import ch.sbb.spc.Environment;
 import ch.sbb.spc.Page;
 import ch.sbb.spc.ReauthenticationMethod;
 import ch.sbb.spc.RequestListener;
 import ch.sbb.spc.Response;
 import ch.sbb.spc.Scope;
+import ch.sbb.spc.Settings;
 import ch.sbb.spc.SwissPassLoginClient;
 import ch.sbb.spc.SwissPassMobileClient;
 import ch.sbb.spc.TokenResponse;
@@ -29,7 +33,7 @@ import ch.sbb.spc.UserInfoResponse;
  * <p>
  * If you use Proguard then you have to copy proguard rules from this project.
  */
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     TextView accessTokenTextView;
     TextView userInfoTextView;
@@ -39,6 +43,12 @@ public class MainActivity extends Activity {
     TextView isLoggedInTextView;
     TextView swisspassStatus;
     RadioButton fingerprintSelector;
+
+    String clientId = "oauth_tester_inte";
+    String redirectAppUrl = "sidapp://oauth/callback";
+    String provider = "oauth_t";
+
+    ClientFactory<MainActivity> factory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +63,12 @@ public class MainActivity extends Activity {
         isLoggedInTextView = findViewById(R.id.isLoggedInTextView);
         swisspassStatus = findViewById(R.id.swisspassStatus);
         fingerprintSelector.setChecked(true);
+
+        factory = new ClientFactory<>(this);
+        factory.initializeActivityResult(this);
+        Settings settings = new Settings(clientId, provider, redirectAppUrl, Environment.INTEGRATION);
+        SwissPassLoginClient loginClient = factory.createLoginClient(settings);
+        factory.createMobileClient(loginClient);
     }
 
     public void onLogin(View view) {
@@ -154,20 +170,6 @@ public class MainActivity extends Activity {
                         } else {
                             MainActivity.this.userInfoTextView.setText("");
                         }
-                    }
-                });
-            }
-        });
-    }
-
-    public void onTokenManagement(View view) {
-        SwissPassLoginClient.getInstance().openSwissPass(Page.TOKEN_MANAGEMENT, new RequestListener<Response>() {
-            @Override
-            public void onResult(final Response result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showError(result);
                     }
                 });
             }
