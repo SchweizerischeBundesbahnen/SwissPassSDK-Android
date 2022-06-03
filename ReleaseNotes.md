@@ -1,6 +1,21 @@
 ﻿Release Notes SwissPassClient SDK for Android
 =============================================
 
+## Version 4.0.0
+_02.06.2022
+#### Features
+* Added support for OpenId Connect Discovery to load the OpenID provider configuration information
+* Use Coroutines
+* ClientFactory to create SwissPassLoginClient and SwissPassMobileClient and to initialize Activity observables
+* Added support for an identity assurance level on the `SwissPassLoginUser` based on the new enum type `IAL`. Note that currently only ial1 and ial2 are supported.
+#### Changes
+* Changed the app2web SSO mechanism to use the new SSO ticket endpoint
+* Adapt new Design Systems
+* Success value on browser close
+#### Bugfixes
+* Properly use lastDataUpdate
+* Fix various Exceptions
+
 ## Version 3.1.3
 _11.11.2021_
 #### Changes

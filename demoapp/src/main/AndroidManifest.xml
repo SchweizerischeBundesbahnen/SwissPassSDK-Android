@@ -6,6 +6,7 @@
 
     <application
         android:name=".DemoApplication"
+        android:theme="@style/AppTheme"
         android:label="SwissPass Test">
 
         <!-- Testapp -->
@@ -33,7 +34,7 @@
         -->
         <activity
             android:name="ch.sbb.spc.OAuthActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:theme="@style/AppTheme"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
