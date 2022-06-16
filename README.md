@@ -22,7 +22,7 @@ In the event of a logout, the existing activation on the SwissPass will not be d
 
 ## Requirements
 
-Android min API Level 21.
+Android min API Level 23.
 
 ## Further information
 
