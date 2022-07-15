@@ -44,12 +44,6 @@ public class MainActivity extends AppCompatActivity {
     TextView swisspassStatus;
     RadioButton fingerprintSelector;
 
-    String clientId = "oauth_tester_inte";
-    String redirectAppUrl = "sidapp://oauth/callback";
-    String provider = "oauth_t";
-
-    ClientFactory<MainActivity> factory;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,11 +58,7 @@ public class MainActivity extends AppCompatActivity {
         swisspassStatus = findViewById(R.id.swisspassStatus);
         fingerprintSelector.setChecked(true);
 
-        factory = new ClientFactory<>(this);
-        factory.initializeActivityResult(this);
-        Settings settings = new Settings(clientId, provider, redirectAppUrl, Environment.INTEGRATION);
-        SwissPassLoginClient loginClient = factory.createLoginClient(settings);
-        factory.createMobileClient(loginClient);
+        DemoApplication.getClientFactory().initializeActivityResult(this);
     }
 
     public void onLogin(View view) {
