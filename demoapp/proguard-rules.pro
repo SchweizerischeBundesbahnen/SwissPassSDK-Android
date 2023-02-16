@@ -7,12 +7,13 @@
 -keep class ch.sbb.spc.SwissPassMobileData { *; }
 -keep class ch.sbb.spc.SwissPassMobileImage { *; }
 -keep class ch.sbb.spc.UserInfo { *; }
+-keep class ch.sbb.spc.SwissPassMobileClient { *; }
+-keep class ch.sbb.spc.SwissPassMobileDataCard { *; }
+-keep class ch.sbb.spc.DiscoveryRepository$DiscoveryData { *; }
 -keep class ch.sbb.spc.Settings { *; }
 -keep class ch.sbb.spc.SwissPassMobileUpdater { *; }
 -keep class ch.sbb.spc.SwissPassMobileSettings { *; }
 -keep class ch.sbb.spc.SwissPassLoginClient { *; }
--keep class ch.sbb.spc.SwissPassMobileClient { *; }
--keep class ch.sbb.spc.SwissPassMobileDataCard { *; }
 
 -keepclassmembers,allowshrinking,allowobfuscation class  android.support.** {
     !static final <fields>;
