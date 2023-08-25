@@ -1,6 +1,33 @@
 ﻿Release Notes SwissPassClient SDK for Android
 =============================================
 
+## Version 4.1.0
+_25.08.2023_
+#### Changes
+* Changed the SwissPass card number handling.
+* Added the SwissPass Mobile card number
+* Added an boolean property isContactMobilePhoneNumberVerified to UserInfo
+
+## Version 4.0.5
+_13.02.2023_
+#### Bugfixes
+* Fixed invalid_token error with valid accessToken when Refresh Token is not available
+
+## Version 4.0.4
+_20.10.2022_
+#### Bugfixes
+* Fix bluetooth_name crash for targetSdk 32
+
+## Version 4.0.3
+_13.10.2022_
+#### Bugfixes
+* Fix OAuth Errors not always returned
+
+## Version 4.0.2
+_01.09.2022_
+#### Bugfixes
+* Fixed wrong QR code display on SPMCardBackView
+
 ## Version 4.0.0
 _02.06.2022
 #### Features
