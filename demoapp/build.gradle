@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
+    namespace 'ch.sbb.spc.demo'
+
     signingConfigs {
         release {
             storeFile file('keystore.jks')
@@ -9,7 +11,7 @@ android {
             keyPassword 'demoapp'
         }
     }
-    compileSdkVersion projectAndroidVersion
+    compileSdk projectAndroidVersion
     defaultConfig {
         applicationId 'ch.sbb.spc.demo'
         minSdkVersion projectAndroidMinVersion
@@ -37,11 +39,10 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
-
-    lintOptions {
+    lint {
         disable 'InvalidPackage'
     }
 }

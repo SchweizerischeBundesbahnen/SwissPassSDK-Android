@@ -4,15 +4,15 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath 'com.android.tools.build:gradle:8.1.1'
     }
 }
 
 ext {
     projectBuildVersion = PUBLISH_VERSION
-    projectAndroidVersion = 32
+    projectAndroidVersion = 33
     projectAndroidMinVersion = 23
-    projectAndroidTargetVersion = 32
+    projectAndroidTargetVersion = 33
 }
 
 apply plugin: 'java'
@@ -25,4 +25,8 @@ subprojects {
             url "https://sbb-artefact-repo-prod.s3.eu-central-1.amazonaws.com/releases"
         }
     }
+}
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
