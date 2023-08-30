@@ -14,6 +14,9 @@
 -keep class ch.sbb.spc.SwissPassMobileUpdater { *; }
 -keep class ch.sbb.spc.SwissPassMobileSettings { *; }
 -keep class ch.sbb.spc.SwissPassLoginClient { *; }
+-keep class ch.sbb.spc.ActivityResultObserver$CustomTabResult { *; }
+-keep class ch.sbb.spc.JWT { *; }
+-keep class ch.sbb.spc.JWTHeader { *; }
 
 -keepclassmembers,allowshrinking,allowobfuscation class  android.support.** {
     !static final <fields>;
