@@ -1,6 +1,11 @@
 ﻿Release Notes SwissPassClient SDK for Android
 =============================================
 
+## Version 4.2.0
+_20.02.2024_
+#### Features
+* Added `requestSSOLink` method to `SwissPassLogin`
+
 ## Version 4.1.0
 _25.08.2023_
 #### Changes
