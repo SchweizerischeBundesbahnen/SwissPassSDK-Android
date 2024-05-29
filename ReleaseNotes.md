@@ -1,6 +1,11 @@
 ﻿Release Notes SwissPassClient SDK for Android
 =============================================
 
+## Version 4.3.0
+_29.05.2024_
+#### Features
+* Added `Page.INFO_ABO_DETAILS` as a page for `SwissPassLoginClient.openSwissPass`
+
 ## Version 4.2.0
 _20.02.2024_
 #### Features
