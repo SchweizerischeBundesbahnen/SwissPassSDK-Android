@@ -1,6 +1,11 @@
 ﻿Release Notes SwissPassClient SDK for Android
 =============================================
 
+## Version 4.3.1
+_07.06.2024_
+#### Bugfixes
+* Extend `CustomTabActivity` and `OAuthActivity` from `AppCompatActivity` for layout and Compose compatibility.
+
 ## Version 4.3.0
 _29.05.2024_
 #### Features
