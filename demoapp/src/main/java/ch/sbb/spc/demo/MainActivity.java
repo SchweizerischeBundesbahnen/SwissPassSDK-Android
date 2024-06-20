@@ -1,5 +1,6 @@
 package ch.sbb.spc.demo;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,19 +9,14 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import ch.sbb.spc.AccountStatusResponse;
-import ch.sbb.spc.ClientFactory;
-import ch.sbb.spc.Environment;
+import ch.sbb.spc.AccountStatus;
 import ch.sbb.spc.Page;
 import ch.sbb.spc.ReauthenticationMethod;
 import ch.sbb.spc.RequestListener;
 import ch.sbb.spc.Response;
 import ch.sbb.spc.Scope;
-import ch.sbb.spc.Settings;
 import ch.sbb.spc.SwissPassLoginClient;
 import ch.sbb.spc.SwissPassMobileClient;
-import ch.sbb.spc.TokenResponse;
-import ch.sbb.spc.UserInfoResponse;
 
 /**
  * The demo app shows how to initialize Swisspass OAuthClient and use API calls.
@@ -44,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
     TextView swisspassStatus;
     RadioButton fingerprintSelector;
 
+    private SwissPassLoginClient loginClient;
+    private SwissPassMobileClient mobileClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,66 +58,26 @@ public class MainActivity extends AppCompatActivity {
         fingerprintSelector.setChecked(true);
 
         DemoApplication.getClientFactory().initializeActivityResult(this);
+        loginClient = SwissPassLoginClient.getInstance();
+        mobileClient = SwissPassMobileClient.getInstance();
     }
 
     public void onLogin(View view) {
-        SwissPassLoginClient.getInstance().requestLogin(new Scope(), new RequestListener<TokenResponse>() {
-            @Override
-            public void onResult(final TokenResponse result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showError(result);
-                        MainActivity.this.accessTokenTextView.setText(result.getAccessToken());
-                    }
-                });
-            }
-        });
+        loginClient.requestLogin(new Scope(), new DefaultContinuation<>((result) -> {
+            showError(result);
+            runOnUiThread(() -> accessTokenTextView.setText(result.getAccessToken()));
+        }));
     }
 
     public void onRegister(View view) {
-        SwissPassLoginClient.getInstance().requestRegistration(new RequestListener<Response>() {
-            @Override
-            public void onResult(final Response result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showError(result);
-                    }
-                });
-            }
-        });
-    }
-
-    public void onRefreshToken(View view) {
-        SwissPassLoginClient.getInstance().requestToken(true, new RequestListener<TokenResponse>() {
-            @Override
-            public void onResult(final TokenResponse result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showError(result);
-                        MainActivity.this.accessTokenTextView.setText(result.getAccessToken());
-                    }
-                });
-
-            }
-        });
+        loginClient.requestRegistration(new DefaultContinuation<>(this::showError));
     }
 
     public void onToken(View view) {
-        SwissPassLoginClient.getInstance().requestToken(false, new RequestListener<TokenResponse>() {
-            @Override
-            public void onResult(final TokenResponse result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showError(result);
-                        MainActivity.this.accessTokenTextView.setText(result.getAccessToken());
-                    }
-                });
-            }
-        });
+        loginClient.requestToken(new DefaultContinuation<>(result -> {
+            showError(result);
+            runOnUiThread(() -> accessTokenTextView.setText(result.getAccessToken()));
+        }));
     }
 
     public void onIsKeyStoreAvailable(View view) {
@@ -132,122 +91,49 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onLogout(View view) {
-        SwissPassLoginClient.getInstance().requestLogout(new RequestListener<Response>() {
-            @Override
-            public void onResult(final Response result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showError(result);
-                        MainActivity.this.accessTokenTextView.setText("");
-                        MainActivity.this.userInfoTextView.setText("");
-                    }
-                });
-            }
-        });
+        loginClient.requestLogout(new DefaultContinuation<>(result -> {
+            showError(result);
+            runOnUiThread(() -> {
+                accessTokenTextView.setText("");
+                userInfoTextView.setText("");
+            });
+        }));
     }
 
     public void onUserInfo(View view) {
-        SwissPassLoginClient.getInstance().requestUserInfo(new RequestListener<UserInfoResponse>() {
-            @Override
-            public void onResult(final UserInfoResponse result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showError(result);
-                        if (result.getUserInfo() != null) {
-                            MainActivity.this.userInfoTextView.setText(result.getUserInfo().getFirstName() + " " + result.getUserInfo().getLastName());
-                        } else {
-                            MainActivity.this.userInfoTextView.setText("");
-                        }
-                    }
-                });
+        loginClient.requestUserInfo(new DefaultContinuation<>(result -> {
+            showError(result);
+            if (result.getUserInfo() != null) {
+                final String text = String.format("%s %s", result.getUserInfo().getFirstName(), result.getUserInfo().getLastName());
+                runOnUiThread(() -> userInfoTextView.setText(text));
+            } else {
+                runOnUiThread(() -> userInfoTextView.setText(""));
             }
-        });
+        }));
     }
 
     public void onAccountManagement(View view) {
-        SwissPassLoginClient.getInstance().openSwissPass(Page.ACCOUNT_MANAGEMENT, new RequestListener<Response>() {
-            @Override
-            public void onResult(final Response result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showError(result);
-                    }
-                });
-            }
-        });
+        loginClient.openSwissPass(Page.ACCOUNT_MANAGEMENT, null, new DefaultContinuation<>(this::showError));
     }
 
     public void onLoginDataManagement(View view) {
-        SwissPassLoginClient.getInstance().openSwissPass(Page.LOGIN_DATA_MANAGEMENT, new RequestListener<Response>() {
-            @Override
-            public void onResult(final Response result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showError(result);
-                    }
-                });
-            }
-        });
+        loginClient.openSwissPass(Page.LOGIN_DATA_MANAGEMENT, null, new DefaultContinuation<>(this::showError));
     }
 
     public void onLinkCard(View view) {
-        SwissPassLoginClient.getInstance().openSwissPass(Page.LINK_CARD_MANAGEMENT, new RequestListener<Response>() {
-            @Override
-            public void onResult(final Response result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showError(result);
-                    }
-                });
-            }
-        });
+        loginClient.openSwissPass(Page.LINK_CARD_MANAGEMENT, null, new DefaultContinuation<>(this::showError));
     }
 
     public void onInfoAbo(View view) {
-        SwissPassLoginClient.getInstance().openSwissPass(Page.INFO_ABOS, new RequestListener<Response>() {
-            @Override
-            public void onResult(final Response result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showError(result);
-                    }
-                });
-            }
-        });
+        loginClient.openSwissPass(Page.INFO_ABOS, "null", new DefaultContinuation<>(this::showError));
     }
 
     public void onInfoSwissPass(View view) {
-        SwissPassLoginClient.getInstance().openSwissPass(Page.INFO_SWISSPASS, new RequestListener<Response>() {
-            @Override
-            public void onResult(final Response result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showError(result);
-                    }
-                });
-            }
-        });
+        loginClient.openSwissPass(Page.INFO_SWISSPASS, null, new DefaultContinuation<>(this::showError));
     }
 
     public void onContact(View view) {
-        SwissPassLoginClient.getInstance().openSwissPass(Page.CONTACT_FORM, new RequestListener<Response>() {
-            @Override
-            public void onResult(final Response result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showError(result);
-                    }
-                });
-            }
-        });
+        loginClient.openSwissPass(Page.CONTACT_FORM, null, new DefaultContinuation<>(this::showError));
     }
 
     public void onReauthenticate(View view) {
@@ -255,55 +141,27 @@ public class MainActivity extends AppCompatActivity {
         if (fingerprintSelector.isChecked()) {
             reauthenticationMethod = ReauthenticationMethod.FINGERPRINT_ONLY;
         }
-
-        SwissPassLoginClient.getInstance().requestAuthentication(reauthenticationMethod, "Fingerprint custom infotext", new RequestListener<Response>() {
-            @Override
-            public void onResult(final Response result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showError(result);
-                    }
-                });
-            }
-        });
+        loginClient.requestAuthentication(reauthenticationMethod, "Fingerprint custom infotext", new DefaultContinuation<>(this::showError));
     }
 
+    @SuppressLint("SetTextI18n")
     public void onSwissPassMobileStatus(View view) {
         swisspassStatus.setText("");
-        SwissPassMobileClient.getInstance().requestSwissPassMobileAccountStatus(new RequestListener<AccountStatusResponse>() {
-            @Override
-            public void onResult(final AccountStatusResponse result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showError(result);
-                        if(SPC_ERROR_NO_ERROR == result.getErrorCode()) {
-                            swisspassStatus.setText(result.getSwissPassMobileAccountStatus().toString());
-                        } else {
-                            swisspassStatus.setText("Account Status unavailable, see error");
-                        }
-                    }
-                });
+        mobileClient.requestSwissPassMobileAccountStatus(new DefaultContinuation<>((result) -> {
+            showError(result);
+            if (RequestListener.SPC_ERROR_NO_ERROR == result.getErrorCode()) {
+                final AccountStatus status = result.getSwissPassMobileAccountStatus();
+                if (status != null) {
+                    runOnUiThread(() -> swisspassStatus.setText(status.toString()));
+                }
+            } else {
+                runOnUiThread(() -> swisspassStatus.setText("Account Status unavailable, see error"));
             }
-        });
+        }));
     }
 
     public void onSwissPassMobileActivate(View view) {
-        SwissPassMobileClient.getInstance().requestSwissPassMobileActivation(new RequestListener<Response>() {
-            @Override
-            public void onResult(final Response result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showError(result);
-                        if (result.getErrorCode() == RequestListener.SPC_ERROR_NO_ERROR) {
-                            startActivity(new Intent(MainActivity.this, SwissPassMobileActivity.class));
-                        }
-                    }
-                });
-            }
-        });
+        mobileClient.requestSwissPassMobileActivation(new DefaultContinuation<>(this::showError));
     }
 
     public void onSwissPassMobileShow(View view) {
@@ -315,55 +173,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSwissPassMobileDeactivate(View view) {
-        SwissPassMobileClient.getInstance().requestSwissPassMobileDeactivation(new RequestListener<Response>() {
-            @Override
-            public void onResult(final Response result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showError(result);
-                    }
-                });
-            }
-        });
+        mobileClient.requestSwissPassMobileDeactivation(new DefaultContinuation<>(this::showError));
     }
 
     public void showError(final Response response) {
-        responseCodeTextView.setText("");
-        developerMessageTextView.setText("");
-        userMessageTextView.setText("");
-
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                MainActivity.this.responseCodeTextView.setText(responseCodeToString(response));
-                MainActivity.this.developerMessageTextView.setText(response.getDeveloperErrorMessage());
-                if (response.getUserErrorMessage() != null && response.getUserErrorMessage().length() > 0) {
-                    MainActivity.this.userMessageTextView.setText(response.getUserErrorMessage());
-                }
+        runOnUiThread(() -> {
+            responseCodeTextView.setText("");
+            developerMessageTextView.setText("");
+            userMessageTextView.setText("");
+            responseCodeTextView.setText(responseCodeToString(response));
+            developerMessageTextView.setText(response.getDeveloperErrorMessage());
+            if (!response.getUserErrorMessage().isEmpty()) {
+                userMessageTextView.setText(response.getUserErrorMessage());
             }
         });
     }
 
     private String responseCodeToString(Response response) {
-        switch (response.getErrorCode()) {
-            case RequestListener.SPC_ERROR_ACCESS_DENIED:
-                return "SPC_ERROR_ACCESS_DENIED";
-            case RequestListener.SPC_ERROR_CANCELLED:
-                return "SPC_ERROR_CANCELLED";
-            case RequestListener.SPC_ERROR_OAUTH_INVALID_TOKEN:
-                return "SPC_ERROR_INVALID_TOKEN";
-            case RequestListener.SPC_ERROR_IO:
-                return "SPC_ERROR_IO";
-            case RequestListener.SPC_ERROR_NO_ERROR:
-                return "SPC_ERROR_NO_ERROR";
-            case RequestListener.SPC_ERROR_NO_WEB_BROWSER_FOUND:
-                return "SPC_ERROR_NO_WEB_BROWSER_FOUND";
-            case RequestListener.SPC_ERROR_TERMS_NOT_ACCEPTED:
-                return "SPC_ERROR_TERMS_NOT_ACCEPTED";
-            case RequestListener.SPC_ERROR_USER_LOGGED_IN:
-                return "SPC_ERROR_USER_LOGGED_IN";
-        }
-        return "";
+        return switch (response.getErrorCode()) {
+            case RequestListener.SPC_ERROR_ACCESS_DENIED -> "SPC_ERROR_ACCESS_DENIED";
+            case RequestListener.SPC_ERROR_CANCELLED -> "SPC_ERROR_CANCELLED";
+            case RequestListener.SPC_ERROR_OAUTH_INVALID_TOKEN -> "SPC_ERROR_INVALID_TOKEN";
+            case RequestListener.SPC_ERROR_IO -> "SPC_ERROR_IO";
+            case RequestListener.SPC_ERROR_NO_ERROR -> "SPC_ERROR_NO_ERROR";
+            case RequestListener.SPC_ERROR_NO_WEB_BROWSER_FOUND -> "SPC_ERROR_NO_WEB_BROWSER_FOUND";
+            case RequestListener.SPC_ERROR_TERMS_NOT_ACCEPTED -> "SPC_ERROR_TERMS_NOT_ACCEPTED";
+            case RequestListener.SPC_ERROR_USER_LOGGED_IN -> "SPC_ERROR_USER_LOGGED_IN";
+            default -> "";
+        };
     }
 }

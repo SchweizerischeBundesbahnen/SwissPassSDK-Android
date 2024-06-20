@@ -114,12 +114,6 @@
                 android:onClick="onToken"
                 android:text="Get Token" />
 
-            <Button
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:onClick="onRefreshToken"
-                android:text="Refresh Token" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -143,12 +137,6 @@
                 android:layout_height="wrap_content"
                 android:onClick="onUserInfo"
                 android:text="UserInfo" />
-
-            <Button
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:onClick="onTokenManagement"
-                android:text="Token Management" />
 
             <Button
                 android:layout_width="200dp"
