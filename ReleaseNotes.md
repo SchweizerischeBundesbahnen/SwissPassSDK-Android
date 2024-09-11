@@ -1,6 +1,11 @@
 ﻿Release Notes SwissPassClient SDK for Android
 =============================================
 
+## Version 4.3.2
+_11.09.2024_
+#### Features
+* Release of the separated `SwissPassLogin` artifact as `ch.sbb.sid.android.lib:swisspass-login:4.3.2`
+
 ## Version 4.3.1
 _07.06.2024_
 #### Bugfixes
