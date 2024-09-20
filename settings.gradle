@@ -1,2 +1,1 @@
 include ':demoapp'
-include ':swisspass_compose'

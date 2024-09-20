@@ -1,7 +1,7 @@
 ﻿SwissPassClient SDK for Android
 ===============================
 
-Copyright &copy; Schweizerische Bundesbahnen SBB, 2016-2021.
+Copyright &copy; Schweizerische Bundesbahnen SBB, 2016-2024.
 
 ## Overview
 
