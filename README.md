@@ -27,3 +27,68 @@ Android min API Level 23.
 ## Further information
 
 All error messages and their descriptions are in RequestListener.java
+
+## Usage
+
+* Add the Maven Repo in the root build.gradle
+```groovy
+repositories {
+    ${otherDependencies}
+    maven {
+        url "https://sbb-artefact-repo-prod.s3.eu-central-1.amazonaws.com/releases"
+    }
+}
+```
+
+* Add the dependency in the app build.gradle (for Login and Mobile)
+```groovy
+implementation 'ch.sbb.sid.android.lib:swisspass-client:${latestSwissPassRelease}'
+```
+
+* Add the dependency in the app build.gradle (for Login)
+```groovy
+implementation 'ch.sbb.sid.android.lib:swisspass-login:${latestSwissPassRelease}'
+```
+
+* initialize the components
+```java
+// lifecycle must be a LifecycleOwner, ViewModelStoreOwner (e.g. Activity or Application)
+final ClientFactory clientFactory = new ClientFactory<>(lifecycle);
+clientFactory.initializeActivityResult(lifecycle);
+// clientId, provider and redirectAppUrl are client specific
+final Settings settings = new Settings(clientId, provider, redirectAppUrl, Environment.PRODUCTION);
+final SwissPassLoginClient loginClient = clientFactory.createLoginClient(settings);
+// only with dependency to Mobile
+final SwissPassMobileClient mobileClient = clientFactory.createMobileClient(loginClient);
+```
+
+* using the clients in the app
+```java
+final SwissPassLoginClient loginClient = SwissPassLoginClient.getInstance();
+// only with dependency to Mobile
+final SwissPassMobileClient mobileClient = SwissPassMobileClient.getInstance();
+```
+
+* register the OAuthActivity in the AndroidManifest.xml
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        ...
+        <activity
+            android:name="ch.sbb.spc.OAuthActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+        
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+        
+                <data
+                    android:host="${host}"
+                    android:scheme="${scheme}" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
+```
