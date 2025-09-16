@@ -4,16 +4,16 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.4.1'
+        classpath 'com.android.tools.build:gradle:8.12.2'
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0'
     }
 }
 
 ext {
     projectBuildVersion = PUBLISH_VERSION
-    projectAndroidVersion = 34
+    projectAndroidVersion = 36
     projectAndroidMinVersion = 23
-    projectAndroidTargetVersion = 34
+    projectAndroidTargetVersion = 36
 }
 
 apply plugin: 'java'
@@ -28,6 +28,6 @@ subprojects {
     }
 }
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }

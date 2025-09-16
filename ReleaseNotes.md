@@ -1,6 +1,14 @@
 ﻿Release Notes SwissPassClient SDK for Android
 =============================================
 
+## Version 4.4.0
+_05.09.2025_
+#### Features
+* `SecurityLevel` on `UserInfo`
+* using compileSdk 36
+* using JDK 21
+* using OkHttp 5.1.0
+
 ## Version 4.3.2
 _11.09.2024_
 #### Features

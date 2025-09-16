@@ -7,7 +7,11 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.activity.ComponentActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import ch.sbb.spc.AccountStatus;
 import ch.sbb.spc.Page;
@@ -17,6 +21,7 @@ import ch.sbb.spc.Response;
 import ch.sbb.spc.Scope;
 import ch.sbb.spc.SwissPassLoginClient;
 import ch.sbb.spc.SwissPassMobileClient;
+import ch.sbb.spc.UserInfo;
 
 /**
  * The demo app shows how to initialize Swisspass OAuthClient and use API calls.
@@ -29,7 +34,7 @@ import ch.sbb.spc.SwissPassMobileClient;
  * <p>
  * If you use Proguard then you have to copy proguard rules from this project.
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ComponentActivity {
 
     TextView accessTokenTextView;
     TextView userInfoTextView;
@@ -60,6 +65,13 @@ public class MainActivity extends AppCompatActivity {
         DemoApplication.getClientFactory().initializeActivityResult(this);
         loginClient = SwissPassLoginClient.getInstance();
         mobileClient = SwissPassMobileClient.getInstance();
+
+        WindowCompat.enableEdgeToEdge(getWindow());
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.parentLayout), (view, insets) -> {
+            final Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+            view.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return WindowInsetsCompat.CONSUMED;
+        });
     }
 
     public void onLogin(View view) {
@@ -103,8 +115,9 @@ public class MainActivity extends AppCompatActivity {
     public void onUserInfo(View view) {
         loginClient.requestUserInfo(new DefaultContinuation<>(result -> {
             showError(result);
-            if (result.getUserInfo() != null) {
-                final String text = String.format("%s %s", result.getUserInfo().getFirstName(), result.getUserInfo().getLastName());
+            final UserInfo userInfo = result.getUserInfo();
+            if (userInfo != null) {
+                final String text = String.format("%s %s\n%s", userInfo.getFirstName(), userInfo.getLastName(), userInfo.getSecurityLevel());
                 runOnUiThread(() -> userInfoTextView.setText(text));
             } else {
                 runOnUiThread(() -> userInfoTextView.setText(""));

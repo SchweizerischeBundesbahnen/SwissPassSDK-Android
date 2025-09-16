@@ -16,16 +16,13 @@ android {
         applicationId 'ch.sbb.spc.demo'
         minSdkVersion projectAndroidMinVersion
         targetSdkVersion projectAndroidTargetVersion
-        versionCode 403010
+        versionCode 404000
         versionName projectBuildVersion
     }
     packagingOptions {
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/NOTICE.txt'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/ASL2.0.txt'
-        exclude 'META-INF/ASL2.0'
+        resources {
+            excludes += ['META-INF/LICENSE.txt', 'META-INF/LICENSE', 'META-INF/NOTICE.txt', 'META-INF/NOTICE', 'META-INF/ASL2.0.txt', 'META-INF/ASL2.0']
+        }
     }
     buildTypes {
         debug {
@@ -39,8 +36,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
     lint {
         disable 'InvalidPackage'
@@ -48,7 +45,7 @@ android {
 }
 
 dependencies {
-    implementation 'ch.sbb.sid.android.lib:swisspass-client:4.3.2'
+    implementation 'ch.sbb.sid.android.lib:swisspass-client:4.4.0'
 
     // logging is optional, if needed then use these dependencies and
     // use the logback.xml config file from assets to configure the log level INFO or WARN.
