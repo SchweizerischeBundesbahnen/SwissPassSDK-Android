@@ -1,4 +1,7 @@
-﻿SwissPassClient SDK for Android
+> [!WARNING]
+> repository url changed to https://sbb-artefact-repo.s3.eu-central-1.amazonaws.com/releases
+ 
+SwissPassClient SDK for Android
 ===============================
 
 Copyright &copy; Schweizerische Bundesbahnen SBB, 2016-2024.
