@@ -23,7 +23,7 @@ subprojects {
         google()
         mavenCentral()
         maven {
-            url "https://sbb-artefact-repo-prod.s3.eu-central-1.amazonaws.com/releases"
+            url "https://sbb-artefact-repo.s3.eu-central-1.amazonaws.com/releases"
         }
     }
 }
