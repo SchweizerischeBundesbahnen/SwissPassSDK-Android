@@ -30,15 +30,12 @@ All error messages and their descriptions are in RequestListener.java
 
 ## Usage
 
-> [!WARNING]
-> repository url changed to https://sbb-artefact-repo.s3.eu-central-1.amazonaws.com/releases
-
 * Add the Maven Repo in the root build.gradle
 ```groovy
 repositories {
     ${otherDependencies}
     maven {
-        url "https://sbb-artefact-repo.s3.eu-central-1.amazonaws.com/releases"
+        url "https://sbb-artefact-repo-prod.s3.eu-central-1.amazonaws.com/releases"
     }
 }
 ```
