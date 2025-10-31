@@ -1,6 +1,13 @@
 ﻿Release Notes SwissPassClient SDK for Android
 =============================================
 
+## Version 4.4.1
+_31.10.2025_
+#### Features
+* Fix TalkBack issues with the `SwissPassMobileView` and `SwissPassMobileCardView`
+#### Bugfixes
+* downgrade to JDK 17
+
 ## Version 4.4.0
 _05.09.2025_
 #### Features

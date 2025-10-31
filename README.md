@@ -30,16 +30,6 @@ All error messages and their descriptions are in RequestListener.java
 
 ## Usage
 
-* Add the Maven Repo in the root build.gradle
-```groovy
-repositories {
-    ${otherDependencies}
-    maven {
-        url "https://sbb-artefact-repo-prod.s3.eu-central-1.amazonaws.com/releases"
-    }
-}
-```
-
 * Add the dependency in the app build.gradle (for Login and Mobile)
 ```groovy
 implementation 'ch.sbb.sid.android.lib:swisspass-client:${latestSwissPassRelease}'
